@@ -341,4 +341,5 @@ healthchecksdb
 
 # Visual Micro local configuration files and directories
 *.vsarduino.h
-**/__vm
+**/__vm/*
+!**/__vm/*.vsarduino.h
