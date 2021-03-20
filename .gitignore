@@ -338,3 +338,7 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+
+# Visual Micro local configuration files and directories
+*.vsarduino.h
+**/__vm
