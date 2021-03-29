@@ -19,5 +19,9 @@
   </ItemGroup>
   <ItemGroup>
     <!-- <ClInclude Include="$(MSBuildThisFileDirectory)Cat_Lamp.h" /> -->
+    <ClCompile Include="$(MSBuildThisFileDirectory)lighting.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)lighting.h" />
   </ItemGroup>
 </Project>
