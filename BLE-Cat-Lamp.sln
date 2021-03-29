@@ -10,6 +10,11 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Cat Lamp", "Cat Lamp\Cat Lamp.vcxitems", "{EE1F58B7-0207-41F4-B3D0-F65787A83D7A}"
 EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Cat Lamp\Cat Lamp.vcxitems*{c5f80730-f44f-4478-bdae-6634efc2ca88}*SharedItemsImports = 4
+		Cat Lamp\Cat Lamp.vcxitems*{ee1f58b7-0207-41f4-b3d0-f65787a83d7a}*SharedItemsImports = 9
+		Cat Lamp\Cat Lamp.vcxitems*{ffc73955-161a-4623-9172-9a3f9796a2ef}*SharedItemsImports = 4
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
 		Release|x86 = Release|x86
