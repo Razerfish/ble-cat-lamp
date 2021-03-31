@@ -1,7 +1,0 @@
-// 
-// 
-// 
-
-#include "lighting.h"
-
-
