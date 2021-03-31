@@ -4,10 +4,11 @@
  Author:	fiona.wilson
 */
 
+//#include <Adafruit_NeoPixel.h>
 #include <AUnitVerbose.h>
 
 // Include files to test here.
-
+#include "lighting.h"
 
 // Define tests here.
 
