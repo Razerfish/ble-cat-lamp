@@ -9,8 +9,6 @@
 	#include "WProgram.h"
 #endif
 
-#include <Adafruit_NeoPixel.h>
-
 #define RGB 3
 #define RGBW 4
 
