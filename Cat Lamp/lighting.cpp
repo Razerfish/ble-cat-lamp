@@ -8,48 +8,51 @@ void CatLamp_NeoPixel::rainbowGradientFill(uint16_t pos, uint16_t length, uint8_
 {
 	float ratio = pos / length;
 
-	int normalized = ratio * 256 * 6;
+	// Find our precise location in a 6 sector gradient with each sector being 256 units long
+	uint16_t normalized = ratio * 256 * 6;
 
-	int range = normalized % 256;
+	// Find the distance from the start of our sector
+	uint16_t range = normalized % 256;
 
 	uint8_t r, g, b;
 
+	// Switch depending on which sector we're in
 	switch (normalized / 256)
 	{
-	case 0: // Red -> Yellow
+	case 0: // Red(255, 0, 0) -> Yellow (255, 255, 0)
 		r = 255;
 		g = range;
 		b = 0;
 		break;
-	case 1: // Yellow -> Green
+	case 1: // Yellow(255, 255, 0) -> Green(0, 255, 0)
 		r = 255 - range;
 		g = 255;
-		b = 0;
+		r = 0;
 		break;
-	case 2: // Green -> Cyan
+	case 2: // Green(0, 255, 0) -> Cyan(0, 255, 255)
 		r = 0;
 		g = 255;
 		b = range;
 		break;
-	case 3: // Cyan -> Blue
+	case 3: // Cyan(0, 255, 255) -> Blue(0, 0, 255)
 		r = 0;
 		g = 255 - range;
 		b = 255;
 		break;
-	case 4: // Blue -> Magenta
+	case 4: // Blue(0, 0, 255) -> Magenta(255, 0, 255)
 		r = range;
 		g = 0;
 		b = 255;
 		break;
-	case 5: // Magenta -> Red
+	case 5: // Magenta(255, 0, 255) -> Red(255, 0, 0)
 		r = 255;
 		g = 0;
 		b = 255 - range;
 		break;
 	}
 
-	// Check if we're an RGB or RGBW strip and call fill.
-	if (bOffset == rOffset) // RGB
+	// Check if we're an RGB or an RGBW strip and then call fill
+	if (wOffset == rOffset) // RGB
 	{
 		fill(ColorDimmable(r, g, b, brightness));
 	}
@@ -58,7 +61,7 @@ void CatLamp_NeoPixel::rainbowGradientFill(uint16_t pos, uint16_t length, uint8_
 		fill(ColorDimmable(r, g, b, 0, brightness));
 	}
 
-	// Up to the user to call show();
+	// Up to the user to call show()
 }
 
 
