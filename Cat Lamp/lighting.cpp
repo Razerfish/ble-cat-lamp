@@ -79,7 +79,7 @@ uint32_t rainbowGradient(uint16_t pos, uint16_t length, int stripType, uint8_t b
 	// Check if we're an RGB or an RGBW strip and then call fill
 	if (stripType == 4) // RGBW
 	{
-		return colorDimmable(r, g, b, w, brightness);
+		return colorDimmable(r, g, b, 0, brightness);
 	}
 	else // RGB
 	{
