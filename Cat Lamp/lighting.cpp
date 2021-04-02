@@ -31,7 +31,7 @@ uint32_t colorDimmable(uint8_t r, uint8_t g, uint8_t b, uint8_t w, uint8_t brigh
 
 uint32_t rainbowGradient(uint16_t pos, uint16_t length, int stripType, uint8_t brightness)
 {
-	float ratio = pos / length;
+	float ratio = float(pos) / float(length);
 
 	// Find our precise location in a 6 sector gradient with each sector being 256 units long
 	uint16_t normalized = ratio * 256 * 6;
@@ -52,7 +52,7 @@ uint32_t rainbowGradient(uint16_t pos, uint16_t length, int stripType, uint8_t b
 	case 1: // Yellow(255, 255, 0) -> Green(0, 255, 0)
 		r = 255 - range;
 		g = 255;
-		r = 0;
+		b = 0;
 		break;
 	case 2: // Green(0, 255, 0) -> Cyan(0, 255, 255)
 		r = 0;
