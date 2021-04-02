@@ -11,16 +11,13 @@
 
 #include <Adafruit_NeoPixel.h>
 
-class CatLamp_NeoPixel : public Adafruit_NeoPixel
-{
-	using Adafruit_NeoPixel::Adafruit_NeoPixel;
+#define RGB 3
+#define RGBW 4
 
-public:
-	void rainbowGradientFill(uint16_t pos, uint16_t length, uint8_t brightness = 255);
+uint32_t colorDimmable(uint8_t r, uint8_t g, uint8_t b, uint8_t brightness);
+uint32_t colorDimmable(uint8_t r, uint8_t g, uint8_t b, uint8_t w, uint8_t brightness);
 
-	static uint32_t ColorDimmable(uint8_t r, uint8_t g, uint8_t b, uint8_t brightness);
-	static uint32_t ColorDimmable(uint8_t r, uint8_t g, uint8_t b, uint8_t w, uint8_t brightness);
-};
+uint32_t rainbowGradient(uint16_t pos, uint16_t length, int stripType, uint8_t brightness = 255);
 
 #endif
 

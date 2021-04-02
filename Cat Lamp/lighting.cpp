@@ -4,7 +4,32 @@
 
 #include "lighting.h"
 
-void CatLamp_NeoPixel::rainbowGradientFill(uint16_t pos, uint16_t length, uint8_t brightness)
+uint32_t colorDimmable(uint8_t r, uint8_t g, uint8_t b, uint8_t brightness)
+{
+	float ratio = brightness / 255.0f;
+
+	r *= ratio;
+	g *= ratio;
+	b *= ratio;
+
+	return ((uint32_t)r << 16) | ((uint32_t)g << 8) | b;
+}
+
+
+uint32_t colorDimmable(uint8_t r, uint8_t g, uint8_t b, uint8_t w, uint8_t brightness)
+{
+	float ratio = brightness / 255.0f;
+
+	r *= ratio;
+	g *= ratio;
+	b *= ratio;
+	w *= ratio;
+
+	return ((uint32_t)w << 26) | ((uint32_t)r << 16) | ((uint32_t)g << 8) | b;
+}
+
+
+uint32_t rainbowGradient(uint16_t pos, uint16_t length, int stripType, uint8_t brightness)
 {
 	float ratio = pos / length;
 
@@ -52,39 +77,12 @@ void CatLamp_NeoPixel::rainbowGradientFill(uint16_t pos, uint16_t length, uint8_
 	}
 
 	// Check if we're an RGB or an RGBW strip and then call fill
-	if (wOffset == rOffset) // RGB
+	if (stripType == 4) // RGBW
 	{
-		fill(ColorDimmable(r, g, b, brightness));
+		return colorDimmable(r, g, b, w, brightness);
 	}
-	else // RGBW
+	else // RGB
 	{
-		fill(ColorDimmable(r, g, b, 0, brightness));
+		return colorDimmable(r, g, b, brightness);
 	}
-
-	// Up to the user to call show()
-}
-
-
-uint32_t CatLamp_NeoPixel::ColorDimmable(uint8_t r, uint8_t g, uint8_t b, uint8_t brightness)
-{
-	float ratio = brightness / 255.0f;
-
-	r *= ratio;
-	g *= ratio;
-	b *= ratio;
-
-	return ((uint32_t)r << 16) | ((uint32_t)g << 8) | b;
-}
-
-
-uint32_t CatLamp_NeoPixel::ColorDimmable(uint8_t r, uint8_t g, uint8_t b, uint8_t w, uint8_t brightness)
-{
-	float ratio = brightness / 255.0f;
-
-	r *= ratio;
-	g *= ratio;
-	b *= ratio;
-	w *= ratio;
-
-	return ((uint32_t)w << 24) | ((uint32_t)r << 16) | ((uint32_t)g << 8) | b;
 }
