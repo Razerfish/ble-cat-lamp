@@ -9,13 +9,9 @@
 	#include "WProgram.h"
 #endif
 
-#define RGB 3
-#define RGBW 4
-
-uint32_t colorDimmable(uint8_t r, uint8_t g, uint8_t b, uint8_t brightness);
 uint32_t colorDimmable(uint8_t r, uint8_t g, uint8_t b, uint8_t w, uint8_t brightness);
 
-uint32_t rainbowGradient(uint16_t pos, uint16_t length, int stripType, uint8_t brightness = 255);
+uint32_t rainbowGradient(uint16_t pos, uint16_t length, uint8_t brightness = 255);
 
 #endif
 

@@ -4,18 +4,6 @@
 
 #include "lighting.h"
 
-uint32_t colorDimmable(uint8_t r, uint8_t g, uint8_t b, uint8_t brightness)
-{
-	float ratio = brightness / 255.0f;
-
-	r *= ratio;
-	g *= ratio;
-	b *= ratio;
-
-	return ((uint32_t)r << 16) | ((uint32_t)g << 8) | b;
-}
-
-
 uint32_t colorDimmable(uint8_t r, uint8_t g, uint8_t b, uint8_t w, uint8_t brightness)
 {
 	float ratio = brightness / 255.0f;
@@ -29,7 +17,7 @@ uint32_t colorDimmable(uint8_t r, uint8_t g, uint8_t b, uint8_t w, uint8_t brigh
 }
 
 
-uint32_t rainbowGradient(uint16_t pos, uint16_t length, int stripType, uint8_t brightness)
+uint32_t rainbowGradient(uint16_t pos, uint16_t length, uint8_t brightness)
 {
 	float ratio = float(pos) / float(length);
 
@@ -76,13 +64,5 @@ uint32_t rainbowGradient(uint16_t pos, uint16_t length, int stripType, uint8_t b
 		break;
 	}
 
-	// Check if we're an RGB or an RGBW strip and then call fill
-	if (stripType == 4) // RGBW
-	{
-		return colorDimmable(r, g, b, 0, brightness);
-	}
-	else // RGB
-	{
-		return colorDimmable(r, g, b, brightness);
-	}
+	return colorDimmable(r, g, b, 0, brightness);
 }
