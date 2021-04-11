@@ -24,5 +24,8 @@
     <ClInclude Include="__vm\.AUnit Tests.vsarduino.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="lightingTest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
