@@ -11,7 +11,7 @@
 #define LED_PIN 6
 #define LED_COUNT 7
 #define BRIGHTNESS 255
-#define LENGTH 300
+#define LENGTH 600
 
 Adafruit_NeoPixel strip(LED_COUNT, LED_PIN, NEO_GRBW + NEO_KHZ800);
 
@@ -38,16 +38,15 @@ void loop()
 	{
 		if (doRainbow)
 		{
+			if (i > LENGTH)
+			{
+				i = 0;
+			}
+
 			strip.fill(rainbowGradient(i, LENGTH, 255));
 			strip.show();
 
 			i++;
-
-			if (i >= LENGTH)
-			{
-				i = 0;
-				doRainbow = false;
-			}
 		}
 		else
 		{
@@ -76,7 +75,6 @@ void loop()
 				//break;
 			default:
 				i = 0;
-				doRainbow = true;
 			}
 
 			b--;
@@ -89,6 +87,5 @@ void loop()
 		
 
 		last = millis();
-		Serial.println(last);
 	}
 }
