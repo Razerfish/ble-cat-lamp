@@ -23,12 +23,13 @@ void setup()
 	strip.setBrightness(255);
 }
 
-uint16_t last;
+uint32_t last;
+
 uint16_t i = 0;
 
 uint8_t b;
 
-bool doRainbow = false;
+bool doRainbow = true;
 
 
 void loop()
@@ -88,5 +89,6 @@ void loop()
 		
 
 		last = millis();
+		Serial.println(last);
 	}
 }
