@@ -69,10 +69,10 @@ void loop()
 				strip.fill(colorDimmable(255, 255, 255, 0, b));
 				strip.show();
 				break;
-			//case 4:
-				//strip.fill(colorDimmable(0, 0, 0, 255, b));
-				//strip.show();
-				//break;
+			case 4:
+				strip.fill(colorDimmable(0, 0, 0, 255, b));
+				strip.show();
+				break;
 			default:
 				i = 0;
 			}
