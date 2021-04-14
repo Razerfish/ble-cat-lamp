@@ -10,8 +10,6 @@
 
 #define LED_PIN 6
 #define LED_COUNT 7
-#define BRIGHTNESS 255
-#define LENGTH 600
 
 Adafruit_NeoPixel strip(LED_COUNT, LED_PIN, NEO_GRBW + NEO_KHZ800);
 
@@ -23,9 +21,10 @@ void setup()
 	strip.setBrightness(255);
 }
 
+/*
 uint32_t last;
 
-uint16_t i = 0;
+uint16_t pos = 0;
 
 uint8_t b;
 
@@ -86,6 +85,104 @@ void loop()
 		}
 		
 
+		last = millis();
+	}
+}
+*/
+
+uint8_t brightness = 255;
+uint16_t length;
+uint16_t pos;
+uint32_t last = 0;
+
+char c;
+
+bool rainbowActive = false;
+
+void loop()
+{
+	if (Serial.available())
+	{
+		c = Serial.read();
+
+		if (c != '!')
+		{
+			Serial.println(F("Invalid command"));
+		}
+		else
+		{
+			c = Serial.read();
+
+			switch (c)
+			{
+			case 'C':
+				uint8_t cBuf[3];
+				if (Serial.readBytes(cBuf, 3) != 3)
+				{
+					Serial.println("Malformed request");
+				}
+				else
+				{
+					strip.fill(colorDimmable(cBuf[0], cBuf[1], cBuf[2], 0, brightness));
+					strip.show();
+					Serial.println("Set color: " + String(cBuf[0]) + ", " + String(cBuf[1]) + ", " + String(cBuf[3]));
+				}
+
+				rainbowActive = false;
+
+				break;
+
+			case 'B':
+				uint32_t current;
+
+				if (Serial.peek() < 0)
+				{
+					Serial.println("Malformed request");
+				}
+				else
+				{
+					brightness = Serial.read();
+					current = strip.getPixelColor(0);
+					strip.fill(colorDimmable(current, brightness));
+					strip.show();
+					Serial.println("Set brightness to: " + String(brightness));
+				}
+				break;
+
+			case 'R':
+				uint8_t lBuf[2];
+
+				if (Serial.readBytes(lBuf, 2) != 2)
+				{
+					Serial.println("Malformed request");
+				}
+				else
+				{
+					length = uint16_t(lBuf[0]) << 8 | uint16_t(lBuf[1]);
+					rainbowActive = true;
+					pos = 0;
+				}
+				break;
+
+			default:
+				Serial.println("Unknown command: " + c);
+				break;
+			}
+		}
+	}
+
+
+	if (rainbowActive && millis() - last >= 1000 / 60)
+	{
+		if (pos > length)
+		{
+			pos = 0;
+		}
+
+		strip.fill(rainbowGradient(pos, length, brightness));
+		strip.show();
+
+		pos++;
 		last = millis();
 	}
 }
