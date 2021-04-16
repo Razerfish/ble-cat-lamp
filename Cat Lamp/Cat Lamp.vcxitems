@@ -14,9 +14,11 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)bluetooth.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)lighting.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)bluetooth.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)lighting.h" />
   </ItemGroup>
 </Project>
